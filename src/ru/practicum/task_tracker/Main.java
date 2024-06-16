@@ -1,3 +1,8 @@
+package ru.practicum.task_tracker;
+
+import ru.practicum.task_tracker.manager.TaskManager;
+import ru.practicum.task_tracker.task.*;
+
 import java.util.ArrayList;
 
 public class Main {
@@ -19,56 +24,57 @@ public class Main {
         System.out.println();
         Epic epic1 = new Epic("Клининг", "Много задач по уборке", new ArrayList<>());
         Epic epic1added = taskmanager.addEpic(epic1);
-        Subtask subtask1 = new Subtask("Подметание", "Используй веник", Status.NEW, epic1added.getId());
+        Subtask subtask1 = new Subtask("Подметание", "Используй веник", Status.NEW, epic1);
         Subtask subtask1added = taskmanager.addSubtask(subtask1);
-        Subtask subtask2 = new Subtask("Помыть окна", "Средство в подвале", Status.NEW, epic1added.getId());
+        Subtask subtask2 = new Subtask("Помыть окна", "Средство в подвале", Status.NEW, epic1);
         Subtask subtask2added = taskmanager.addSubtask(subtask2);
-        ArrayList<Subtask> subtasks1 = taskmanager.getAllSubtasksOfEpic(epic1added.getId());
+        ArrayList<Subtask> subtasks1 = new ArrayList<>();
+        subtasks1.add(subtask2added);
+        subtasks1.add(subtask1added);
         epic1.setSubtasksForEpic(subtasks1);
-        epic1added.setStatus(epic1added.updateEpicStatus());
 
         // Создаём эпик с одной подзадачей
         Epic epic2 = new Epic("Забота о питомцах", "Дела с пушистиками", new ArrayList<>());
         Epic epic2added = taskmanager.addEpic(epic2);
-        Subtask subtask3 = new Subtask("Покормить котика", "Сухой корм", Status.NEW, epic2added.getId());
+        Subtask subtask3 = new Subtask("Покормить котика", "Сухой корм", Status.NEW, epic2);
         Subtask subtask3added = taskmanager.addSubtask(subtask3);
-        ArrayList<Subtask> subtasks2 =  taskmanager.getAllSubtasksOfEpic(epic2added.getId());
+        ArrayList<Subtask> subtasks2 = new ArrayList<>();
+        subtasks2.add(subtask3added);
         epic2added.setSubtasksForEpic(subtasks2);
-        epic2added.setStatus(epic2added.updateEpicStatus());
 
         //Распечатаем задачи, подзадачи, эпики
         System.out.println();
-        System.out.println(task1added);
-        System.out.println(task2added);
-        System.out.println(subtask1added);
-        System.out.println(subtask2added);
-        System.out.println(subtask3added);
-        System.out.println(epic1added);
-        System.out.println(epic2added);
+        System.out.println(task1);
+        System.out.println(task2);
+        System.out.println(subtask1);
+        System.out.println(subtask2);
+        System.out.println(subtask3);
+        System.out.println(epic1);
+        System.out.println(epic2);
 
         //Изменим статусы созданных объектов и напечатаем их
         System.out.println();
         task1added.setStatus(Status.DONE);
-        System.out.println("Задача 1 статус должен стать DONE: " +task1added.getStatus());
+        System.out.println("Задача 1 статус должен стать DONE: " + task1added.getStatus());
         task2added.setStatus(Status.IN_PROGRESS);
-        System.out.println("Задача 2 статус должен стать IN_PROGRESS: " +task2added.getStatus());
-
+        System.out.println("Задача 2 статус должен стать IN_PROGRESS: " + task2added.getStatus());
         subtask1added.setStatus(Status.DONE);
-        System.out.println("Подзадача 1 статус должен стать DONE: " +subtask1added.getStatus());
+        System.out.println("Подзадача 1 статус должен стать DONE: " + subtask1added.getStatus());
         subtask2added.setStatus(Status.DONE);
-        System.out.println("Подзадача 2 статус должен стать DONE: " +subtask2added.getStatus());
+        System.out.println("Подзадача 2 статус должен стать DONE: " + subtask2added.getStatus());
         subtask3added.setStatus(Status.IN_PROGRESS);
-        System.out.println("Подзадача 3 статус должен стать IN_PROGRESS: " +subtask3added.getStatus());
-
+        System.out.println("Подзадача 3 статус должен стать IN_PROGRESS: " + subtask3added.getStatus());
         epic1added.setStatus(epic1added.updateEpicStatus());
-        System.out.println("Пересчитаем статус эпика 1, должен стать DONE: " +epic1added.getStatus());
+        System.out.println("Пересчитаем статус эпика 1, должен стать DONE: " + epic1added.getStatus());
         epic2added.setStatus(epic2added.updateEpicStatus());
-        System.out.println("Пересчитаем статус эпика 2, должен стать IN_PROGRESS: " +epic2added.getStatus());
+        System.out.println("Пересчитаем статус эпика 2, должен стать IN_PROGRESS: " + epic2added.getStatus());
 
         //удалим одну задачу и один эпик
         taskmanager.deleteEpicById(epic1added.getId());
         System.out.println(taskmanager.getEpics());
+        System.out.println(taskmanager.getSubtasks());
         taskmanager.deleteTaskById(task1added.getId());
         System.out.println(taskmanager.getTasks());
+
     }
 }

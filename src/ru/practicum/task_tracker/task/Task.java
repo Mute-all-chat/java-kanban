@@ -1,10 +1,12 @@
+package ru.practicum.task_tracker.task;
+
 import java.util.Objects;
 
 public class Task {
-private Integer id;
-private String name;
-private String description;
-private Status status;
+    private Integer id;
+    private String name;
+    private String description;
+    private Status status;
 
     public Task(Integer id, String name, String description, Status status) {
         this.id = id;
@@ -58,7 +60,7 @@ private Status status;
 
     @Override
     public String toString() {
-        return "Task{" +
+        return "ru.practicum.task_tracker.task.Task{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +

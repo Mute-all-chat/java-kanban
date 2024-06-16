@@ -147,14 +147,13 @@ public class TaskManager {
     }
 
     //Удаление подзадачи по идентификатору
-    public void deleteSubtaskById(int id) {
-        if (subtasks.containsKey(id)) {
-
-            Epic epic = subtasks.get(id).getEpic();
+    public void deleteSubtaskById(int subtaskId) {
+        if (subtasks.containsKey(subtaskId)) {
+            Epic epic = subtasks.get(subtaskId).getEpic();
             ArrayList<Subtask> subtaskList = epic.getSubtasksForEpic();
-            subtaskList.remove(subtasks.get(id));
+            subtaskList.remove(subtasks.get(subtaskId));
             epic.setSubtasksForEpic(subtaskList);
-            subtasks.remove(id);
+            subtasks.remove(subtaskId);
             epic.setStatus(epic.updateEpicStatus());
         }
     }

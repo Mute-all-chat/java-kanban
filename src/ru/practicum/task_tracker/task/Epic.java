@@ -17,7 +17,7 @@ public class Epic extends Task {
 
     public void setSubtasksForEpic(ArrayList<Subtask> subtasksForEpic) {
         this.subtasksForEpic = subtasksForEpic;
-        this.updateEpicStatus();
+        setStatus(updateEpicStatus());
     }
 
     //Обновляем статус эпика в зависимости от состяония сабтаски

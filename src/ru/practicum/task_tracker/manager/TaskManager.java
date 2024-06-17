@@ -47,9 +47,7 @@ public class TaskManager {
         subtasks.clear();
         for (Epic epic : epics.values()) {
             epic.setSubtasksForEpic(new ArrayList<>());
-            epic.setStatus(Status.NEW);
         }
-
     }
 
     //Получение задачи по идентификатору
@@ -98,7 +96,12 @@ public class TaskManager {
         subtask.setId(getIdCount());
         subtasks.put(subtask.getId(), subtask);
         for (Epic epic : epics.values()) {
-            epic.updateEpicStatus();
+            if (!subtask.getEpic().equals(null) && subtask.getEpic().equals(epic)) {
+                ArrayList<Subtask> merge = epic.getSubtasksForEpic();
+                merge.add(subtask);
+                epic.setSubtasksForEpic(merge);
+            }
+            epic.setStatus(epic.updateEpicStatus());
         }
         return subtask;
     }
@@ -122,13 +125,20 @@ public class TaskManager {
     }
 
     //Обновление подзадачи
-    public Task updateSubtask(Subtask subtask) {
+    public Subtask updateSubtask(Subtask subtask) {
         if (!subtasks.containsKey(subtask.getId()) || subtask.getId() == null) {
             return null;
         }
         subtasks.put(subtask.getId(), subtask);
         for (Epic epic : epics.values()) {
-            epic.updateEpicStatus();
+            ArrayList<Subtask> merge = new ArrayList<>();
+            for (Subtask subtaskMerge : subtasks.values()) {
+                merge.add(subtaskMerge);
+                if (subtaskMerge.getEpic().equals(epic)) {
+                    epic.setSubtasksForEpic(merge);
+                    epic.setStatus(epic.updateEpicStatus());
+                }
+            }
         }
         return subtask;
     }
@@ -154,10 +164,8 @@ public class TaskManager {
             subtaskList.remove(subtasks.get(subtaskId));
             epic.setSubtasksForEpic(subtaskList);
             subtasks.remove(subtaskId);
-            epic.setStatus(epic.updateEpicStatus());
         }
     }
-
 
     //Получение списка всех подзадач определённого эпика
     public ArrayList<Subtask> getAllSubtasksOfEpic(int epicId) {
@@ -166,7 +174,7 @@ public class TaskManager {
             return null;
         }
         for (Subtask sub : subtasks.values()) {
-            if (sub.getEpic().equals(epicId)) {
+            if ((sub.getEpic().getId()).equals(epicId)) {
                 result.add(sub);
             }
         }

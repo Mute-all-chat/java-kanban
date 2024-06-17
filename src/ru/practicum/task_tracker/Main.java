@@ -28,19 +28,12 @@ public class Main {
         Subtask subtask1added = taskmanager.addSubtask(subtask1);
         Subtask subtask2 = new Subtask("Помыть окна", "Средство в подвале", Status.NEW, epic1);
         Subtask subtask2added = taskmanager.addSubtask(subtask2);
-        ArrayList<Subtask> subtasks1 = new ArrayList<>();
-        subtasks1.add(subtask2added);
-        subtasks1.add(subtask1added);
-        epic1.setSubtasksForEpic(subtasks1);
 
         // Создаём эпик с одной подзадачей
         Epic epic2 = new Epic("Забота о питомцах", "Дела с пушистиками", new ArrayList<>());
         Epic epic2added = taskmanager.addEpic(epic2);
         Subtask subtask3 = new Subtask("Покормить котика", "Сухой корм", Status.NEW, epic2);
         Subtask subtask3added = taskmanager.addSubtask(subtask3);
-        ArrayList<Subtask> subtasks2 = new ArrayList<>();
-        subtasks2.add(subtask3added);
-        epic2added.setSubtasksForEpic(subtasks2);
 
         //Распечатаем задачи, подзадачи, эпики
         System.out.println();
@@ -76,5 +69,13 @@ public class Main {
         taskmanager.deleteTaskById(task1added.getId());
         System.out.println(taskmanager.getTasks());
 
+        //тест обновления подзадачи и удаления всех подзадач
+        Subtask subtask4 = new Subtask("Покормить бобра", "предпочитает палки", Status.DONE, epic2);
+        subtask4.setId(subtask3.getId());
+        taskmanager.updateSubtask(subtask4);
+        System.out.println();
+        System.out.println(epic2);
+        taskmanager.deleteAllSubtasks();
+        System.out.println(epic2);
     }
 }

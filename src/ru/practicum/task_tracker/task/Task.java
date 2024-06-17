@@ -8,13 +8,6 @@ public class Task {
     private String description;
     private Status status;
 
-    public Task(Integer id, String name, String description, Status status) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.status = status;
-    }
-
     public Task(String name, String description, Status status) { //конструктор без айдишника
         this.name = name;
         this.description = description;
@@ -79,6 +72,6 @@ public class Task {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, description, status);
+        return Objects.hash(id);
     }
 }

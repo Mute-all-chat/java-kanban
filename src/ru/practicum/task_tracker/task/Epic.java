@@ -17,7 +17,7 @@ public class Epic extends Task {
 
     public void setSubtasksForEpic(ArrayList<Subtask> subtasksForEpic) {
         this.subtasksForEpic = subtasksForEpic;
-        setStatus(updateEpicStatus());
+        this.updateEpicStatus();
     }
 
     //Обновляем статус эпика в зависимости от состяония сабтаски
@@ -27,20 +27,20 @@ public class Epic extends Task {
         if (epicSubtasks.isEmpty()) {
             epicStatus = Status.NEW;
         } else {
-            int countNewStatus = 0;
-            int countDoneStatus = 0;
+            int countOfNewStatus = 0;
+            int countOfDoneStatus = 0;
             for (Subtask subtask : epicSubtasks) {
                 if (subtask.getStatus() == Status.DONE) {
-                    countDoneStatus++;
+                    countOfDoneStatus++;
                 }
                 if (subtask.getStatus() == Status.NEW) {
-                    countNewStatus++;
+                    countOfNewStatus++;
                 }
             }
-            if (countDoneStatus == epicSubtasks.size()) {
+            if (countOfDoneStatus == epicSubtasks.size()) {
                 epicStatus = Status.DONE;
             }
-            if (countNewStatus == epicSubtasks.size()) {
+            if (countOfNewStatus == epicSubtasks.size()) {
                 epicStatus = Status.NEW;
             }
         }

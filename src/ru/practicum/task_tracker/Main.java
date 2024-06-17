@@ -1,6 +1,6 @@
 package ru.practicum.task_tracker;
 
-import ru.practicum.task_tracker.manager.TaskManager;
+import ru.practicum.task_tracker.manager.*;
 import ru.practicum.task_tracker.task.*;
 
 import java.util.ArrayList;
@@ -9,7 +9,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        TaskManager taskmanager = new TaskManager();
+        TaskManager taskmanager = Managers.getDefault();
 
         //Создаём первую задачу
         Task task1 = new Task("Уборка", "Пропылесосить комнату, помыть окна", Status.NEW);
@@ -77,5 +77,11 @@ public class Main {
         System.out.println(epic2);
         taskmanager.deleteAllSubtasks();
         System.out.println(epic2);
+
+        //выполним "просмотр" эпика и задачи, выведем историю
+        System.out.println();
+        taskmanager.getEpicById(epic2.getId());
+        taskmanager.getTaskById(task2.getId());
+        System.out.println(taskmanager.getHistory());
     }
 }

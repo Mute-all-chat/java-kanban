@@ -1,6 +1,7 @@
 package ru.practicum.task_tracker.manager;
 
 import ru.practicum.task_tracker.task.*;
+import  ru.practicum.task_tracker.manager.Managers;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,11 +13,11 @@ public class InMemoryTaskManager implements TaskManager {
     private final HashMap<Integer, Epic> epics;
     private final HistoryManager historyStorage;
 
-    public InMemoryTaskManager(InMemoryHistoryManager inMemoryHistoryManager) {
+    public InMemoryTaskManager() {
         this.tasks = new HashMap<>();
         this.subtasks = new HashMap<>();
         this.epics = new HashMap<>();
-        this.historyStorage = inMemoryHistoryManager;
+        historyStorage = Managers.getDefaultHistory();
     }
 
     //каждая новая созданная таска/сабтаска/эпик будет получать +1 к айдишнику

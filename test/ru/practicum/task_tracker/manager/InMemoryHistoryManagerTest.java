@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class InMemoryHistoryManagerTest {
-    private static HistoryManager historyManager = Managers.getDefaultHistory();
+    private static final HistoryManager historyManager = Managers.getDefaultHistory();
 
     @Test
     void add() {

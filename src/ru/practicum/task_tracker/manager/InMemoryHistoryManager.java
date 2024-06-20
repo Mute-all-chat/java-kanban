@@ -5,7 +5,7 @@ import ru.practicum.task_tracker.task.*;
 import java.util.ArrayList;
 
 public class InMemoryHistoryManager implements HistoryManager {
-    public ArrayList<Task> taskHistory;
+    private ArrayList<Task> taskHistory;
 
     public InMemoryHistoryManager() {
         taskHistory = new ArrayList<>();
